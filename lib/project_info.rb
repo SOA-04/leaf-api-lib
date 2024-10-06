@@ -22,3 +22,8 @@ save_yaml('google_maps_distance_matrix',
 nominatim = NominatimAPI.new
 result = nominatim.search('清華大學')
 save_yaml('nominatim_serach_nthu', result)
+
+# Llama API
+api = LlamaAPI.new
+response = api.generate_text('Tell me a joke')
+save_yaml('Llama_response', response)
