@@ -4,6 +4,7 @@ require 'yaml'
 require_relative './services/nthu_api'
 require_relative './services/google_maps_api'
 require_relative './services/nominatim_api'
+require_relative './services/llama_api'
 
 def save_yaml(name, result)
   File.write("spec/fixtures/#{name}-results.yaml", result.to_yaml)
