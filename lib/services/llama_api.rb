@@ -11,7 +11,7 @@ class LlamaAPI
     def initialize
       # Initialize the HTTP client and load API key from the secrets YAML file
       @http = HTTP.accept(:json).follow.persistent('https://api-inference.huggingface.co')
-      @secret = YAML.safe_load_file('../../config/private.yaml')['HUGGINGFACE_API_KEY'] # Load API key from secrets file
+      @secret = YAML.safe_load_file('config/screts.yaml')['HUGGINGFACE_API_KEY'] # Load API key from secrets file
     end
   
     # Generate a text completion based on a given prompt.
@@ -25,7 +25,3 @@ class LlamaAPI
       output[0]['generated_text']
     end
   end
-
-api = LlamaAPI.new
-response = api.generate_text('I hurt my leg, what should i do?')
-puts response
