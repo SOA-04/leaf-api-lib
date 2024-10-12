@@ -17,7 +17,7 @@ jobs:
 
     - name: Setup the project secrets
       run: |
-        cp config/secrets.yaml.example config/secrets.yaml
+        cp config/secrets.yaml.testing config/secrets.yaml
 
     - name: Run the project tests via rake spec command
       run: |
