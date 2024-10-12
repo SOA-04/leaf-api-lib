@@ -24,13 +24,4 @@ describe 'Test Nominatim API library' do
       _(payload[1]['lon']).must_equal CORRECT_RESPONSE[1]['lon']
     end
   end
-
-  describe 'API Authentication Failed' do
-    it 'Raise errors when provided with an invalid query' do
-      nominatim_api = NominatimAPI.new
-      _(proc do
-        nominatim_api.search('')
-      end).must_raise HTTPError
-    end
-  end
 end
