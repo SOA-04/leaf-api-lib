@@ -1,17 +1,29 @@
 # frozen_string_literal: true
 
-require 'minitest/autorun'
-require 'minitest/rg'
-require 'yaml'
+require_relative '../spec_helper'
 
 require_relative '../../lib/services/llama_api'
 require_relative '../../lib/services/api_errors'
 
-CORRECT_SECRETS = YAML.safe_load_file('config/secrets.yaml')
-BAD_SECRETS = YAML.safe_load_file('config/secrets.yaml.example')
-CORRECT_RESPONSE = YAML.safe_load_file('spec/fixtures/Llama_response-results.yaml')
-
 describe 'Test Huggingface API API library' do
+  VCR.configure do |c|
+    c.cassette_library_dir = CASSETTES_FOLDER
+    c.hook_into :webmock
+
+    c.filter_sensitive_data('<HUGGINGFACE_API_KEY>') { CORRECT_SECRETS['HUGGINGFACE_API_KEY'] }
+    c.filter_sensitive_data('<HUGGINGFACE_API_KEY_ESC>') { CGI.escape(CORRECT_SECRETS['HUGGINGFACE_API_KEY']) }
+  end
+
+  before do
+    VCR.insert_cassette 'huggingface_api',
+                        record: :new_episodes,
+                        match_requests_on: %i[method uri headers]
+  end
+
+  after do
+    VCR.eject_cassette
+  end
+
   describe 'API Authentication Failed' do
     it 'Raise errors when provided with incorrect token.' do
       _(proc do
@@ -23,6 +35,7 @@ describe 'Test Huggingface API API library' do
 
   describe 'API Authentication Suceed' do
     it 'Receive correct data.' do
+      YAML.safe_load_file('spec/fixtures/Llama_response-results.yaml')
       payload = LlamaAPI.new(CORRECT_SECRETS['HUGGINGFACE_API_KEY'])
                         .generate_text('Tell me a joke')
       _(payload[0]['generated_text']).wont_be_nil
