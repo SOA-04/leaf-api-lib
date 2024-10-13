@@ -8,9 +8,9 @@ module LeafAPI
     # This is the service class to make API requests to Google Maps API:
     # https://api.nthusa.tw/docs
     class GoogleMapsAPI
-      def initialize(secret)
+      def initialize(secret = nil)
         @http = HTTP.accept(:json).follow.persistent('https://maps.googleapis.com')
-        @secret = secret
+        @secret = secret.nil? ? YAML.safe_load_file('config/secrets.yaml')['GOOGLE_TOKEN'] : secret
       end
 
       # Given 2 points, obtain the distance and travel time.
