@@ -2,9 +2,6 @@
 
 require_relative '../spec_helper'
 
-require_relative '../../lib/services/llama_api'
-require_relative '../../lib/services/api_errors'
-
 describe 'Test Huggingface API API library' do
   VCR.configure do |c|
     c.cassette_library_dir = CASSETTES_FOLDER
@@ -27,17 +24,17 @@ describe 'Test Huggingface API API library' do
   describe 'API Authentication Failed' do
     it 'Raise errors when provided with incorrect token.' do
       _(proc do
-        LlamaAPI.new(BAD_SECRETS['HUGGINGFACE_API_KEY'])
+        LeafAPI::Service::LlamaAPI.new(BAD_SECRETS['HUGGINGFACE_API_KEY'])
                      .generate_text('Tell me a joke')
-      end).must_raise HTTPError
+      end).must_raise LeafAPI::Service::HTTPError
     end
   end
 
   describe 'API Authentication Suceed' do
     it 'Receive correct data.' do
       YAML.safe_load_file('spec/fixtures/Llama_response-results.yaml')
-      payload = LlamaAPI.new(CORRECT_SECRETS['HUGGINGFACE_API_KEY'])
-                        .generate_text('Tell me a joke')
+      payload = LeafAPI::Service::LlamaAPI.new(CORRECT_SECRETS['HUGGINGFACE_API_KEY'])
+                                          .generate_text('Tell me a joke')
       _(payload[0]['generated_text']).wont_be_nil
     end
   end
