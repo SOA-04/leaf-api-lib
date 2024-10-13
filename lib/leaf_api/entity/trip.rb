@@ -7,8 +7,7 @@ module LeafAPI
     # This is a class to represent the concept of trip on the map.
     # This may include strategies like 'driving', 'bicycling', 'school_bus', 'walking', 'trasit'...etc.
     class Trip
-      attr_accessor :starting_point, :destination
-      attr_reader :strategy
+      attr_reader :starting_point, :destination, :strategy
 
       include TravelStrategy
 
