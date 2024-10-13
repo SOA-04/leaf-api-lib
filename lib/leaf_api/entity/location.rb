@@ -5,7 +5,7 @@ module LeafAPI
     # This is a class to represent the concept of location on the map.
     # This may include user's location, bus stop's location, or destination's location.
     class Location
-      attr_accessor :latitude, :longtitude
+      attr_reader :latitude, :longtitude
 
       def initialize(latitude, longtitude)
         @latitude = latitude
