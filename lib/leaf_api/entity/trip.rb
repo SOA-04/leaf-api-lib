@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'travel_strategy'
-
 module LeafAPI
   module Entity
     # This is a class to represent the concept of trip on the map.
@@ -9,16 +7,16 @@ module LeafAPI
     class Trip
       attr_reader :starting_point, :destination, :strategy
 
-      include TravelStrategy
-
-      def initialize(starting_point, destination, strategy = 'walking')
+      def initialize(starting_point, destination, strategy, token)
         @starting_point = starting_point
         @destination = destination
-        @strategy = choose(strategy)
+        @strategy = strategy
+        @token = token
       end
 
       def duration
-        @strategy.duration(starting_point, destination)
+        data = Service::GoogleMapsAPI.new(@token).distance_matrix(@starting_point, @destination, @strategy)
+        data['rows'][0]['elements'][0]['duration']['value']
       end
     end
   end

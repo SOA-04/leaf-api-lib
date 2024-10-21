@@ -26,7 +26,7 @@ describe 'Test Huggingface API API library' do
       _(proc do
         LeafAPI::Service::LlamaAPI.new(BAD_SECRETS['HUGGINGFACE_API_KEY'])
                      .generate_text('Tell me a joke')
-      end).must_raise LeafAPI::Service::HTTPError
+      end).must_raise LeafAPI::HTTPError
     end
   end
 
