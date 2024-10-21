@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'http'
-require_relative 'api_errors'
 
 module LeafAPI
   module Service
@@ -21,9 +20,7 @@ module LeafAPI
                                format: format
                              })
 
-        raise HTTPError.new(response.status.to_s), 'by NominatimAPI' unless response.status.success?
-
-        response.parse
+        Response.new(response).handle_error('by NominatimAPI')
       end
     end
   end

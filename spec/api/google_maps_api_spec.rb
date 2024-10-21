@@ -26,14 +26,14 @@ describe 'Test Google API library' do
       _(proc do
         LeafAPI::Service::GoogleMapsAPI.new(BAD_SECRETS['GOOGLE_TOKEN'])
                      .distance_matrix('光明里 300, Hsinchu City, East District', '24.8022,120.9901', 'walking')
-      end).must_raise LeafAPI::Service::HTTPError
+      end).must_raise LeafAPI::HTTPError
     end
 
     it 'Raise errors when provided with incorrect token on distance matrix.' do
       _(proc do
         LeafAPI::Service::GoogleMapsAPI.new(BAD_SECRETS['GOOGLE_TOKEN'])
                      .geocoding('光明里 300, Hsinchu City, East District')
-      end).must_raise LeafAPI::Service::HTTPError
+      end).must_raise LeafAPI::HTTPError
     end
   end
 
@@ -42,7 +42,11 @@ describe 'Test Google API library' do
       correct_response = YAML.safe_load_file('spec/fixtures/google_maps_distance_matrix-results.yaml')
 
       payload = LeafAPI::Service::GoogleMapsAPI.new(CORRECT_SECRETS['GOOGLE_TOKEN'])
-                                               .distance_matrix('光明里 300, Hsinchu City, East District', '24.8022,120.9901', 'walking')
+                                               .distance_matrix(
+                                                 '光明里 300, Hsinchu City, East District',
+                                                 '24.8022,120.9901',
+                                                 'walking'
+                                               )
       _(payload['destination_addresses'][0]).must_equal correct_response['destination_addresses'][0]
       _(payload['origin_addresses'][0]).must_equal correct_response['origin_addresses'][0]
       _(payload['rows'][0]['elements'][0]).wont_be_nil
