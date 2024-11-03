@@ -33,6 +33,7 @@ end
 group :test do
   gem 'minitest'
   gem 'minitest-rg'
+  gem 'rack-test'
   gem 'rerun', '~> 0.14.0'
   gem 'simplecov', '~> 0.22.0'
   gem 'vcr', '~> 6.3'

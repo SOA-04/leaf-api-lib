@@ -2,9 +2,10 @@
 
 require_relative '../../infrastructure/google_maps/mappers/location_mapper'
 require_relative '../../infrastructure/google_maps/gateways/google_maps_api'
+require_relative '../session_controller'
 
 module Leaf
-  # Module handling location-related routes
+  # Module handling location-related routes with session
   module LocationRoutes
     def self.setup(routing)
       routing.on 'locations' do

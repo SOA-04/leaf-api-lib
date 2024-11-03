@@ -6,5 +6,8 @@ detectors:
   LongParameterList:
     exclude:
     - Leaf::NTHUSA::API#bus_schedule
+  TooManyStatements:
+    enabled: false
+
 exclude_paths:
   - spec/fixture/project_info.rb # one-time test fixture creator
