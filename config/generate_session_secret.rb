@@ -4,7 +4,7 @@ require 'securerandom'
 require 'yaml'
 
 # Generate a secure random 128-character secret
-secret = SecureRandom.hex(64)
+secret = SecureRandom.hex(32)
 
 # Define the file path for `secrets.yml`
 secrets_file_path = File.expand_path('../config/secrets.yaml', __dir__)
