@@ -9,7 +9,7 @@ require_relative '../../config/environment'
 module Leaf
   # This is the main application class that handles routing in Leaf
   class App < Roda
-    plugin :sessions, secret: config.SESSION_SECRET
+    plugin :sessions, secret: ENV.fetch('SESSION_SECRET', 'default_fallback_secret')
     plugin :render, engine: 'slim', views: 'app/views'
     plugin :assets, css: 'style.css', path: 'app/views/assets'
     plugin :common_logger, $stderr
