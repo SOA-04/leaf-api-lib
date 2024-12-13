@@ -7,20 +7,13 @@ require_relative '../../services/add_location'
 require_relative '../../../presentation/view_objects/location'
 
 module Leaf
-  # Module handling location-related routes
-  module LocationRoutes
-    # :reek:TooManyStatements
-    def self.setup(routing)
-      routing.on 'locations' do
-        setup_location_search(routing)
-        setup_location_form(routing)
-        setup_location_result(routing)
-      end
-    end
+  # Application
+  class App < Roda
+    plugin :multi_route
 
-    def self.setup_location_search(routing) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+    route('locations') do |routing| # rubocop:disable Metrics/BlockLength
       routing.post 'search' do
-        # 使用 Form Object 驗證輸入
+        # Validate input using Form Object
         form = Forms::NewLocation.new.call(routing.params)
 
         if form.failure?
@@ -28,63 +21,46 @@ module Leaf
           routing.redirect '/locations'
         end
 
-        # 對輸入地點進行 URI 編碼
+        # Encode location query and call service
         location_query = CGI.escape(form[:location].downcase)
-        puts("Encoded Location Query: #{location_query}")
-
-        # 呼叫 Service Object
         result = Service::AddLocation.new.call(location_query: location_query)
-        puts("Service Result: #{result}")
 
         if result.failure?
           routing.flash[:error] = result.failure
           routing.redirect '/locations'
-        else
-          location_entity = result.value!
-          puts("Location Entity Name: #{location_entity.name}")
-
-          # 儲存最近訪問的地點
-          routing.session[:visited_locations] ||= []
-          routing.session[:visited_locations].insert(0, location_entity.name).uniq!
-          routing.redirect "/locations/#{location_query}"
         end
-      end
-    end
 
-    def self.setup_location_form(routing)
+        # Handle successful result
+        location_entity = result.value!
+        routing.session[:visited_locations] ||= []
+        routing.session[:visited_locations].insert(0, location_entity.name).uniq!
+        routing.redirect "/locations/#{location_query}"
+      end
+
       routing.is do
         routing.get do
           routing.scope.view('location/location_form')
         end
       end
-    end
 
-    def self.setup_location_result(routing) # rubocop:disable Metrics/MethodLength
       routing.on String do |location_query|
         routing.get do
           location_query = CGI.unescape(location_query)
-          handle_location_query(routing, location_query)
+          location_entity = Leaf::GoogleMaps::LocationMapper.new(
+            Leaf::GoogleMaps::API,
+            Leaf::App.config.GOOGLE_TOKEN
+          ).find(location_query)
+
+          location_view = Views::Location.new(location_entity)
+          routing.scope.view('location/location_result', locals: { location: location_view })
         end
+
         routing.delete do
           routing.session[:visited_locations].delete(location_query)
           routing.flash[:notice] = "Location '#{location_query}' has been removed from history."
-
           routing.redirect '/locations'
         end
       end
-    end
-
-    def self.handle_location_query(routing, location_query)
-      # 使用 LocationMapper 獲取地點資料
-      location_entity = Leaf::GoogleMaps::LocationMapper.new(
-        Leaf::GoogleMaps::API,
-        Leaf::App.config.GOOGLE_TOKEN
-      ).find(location_query)
-
-      puts(location_entity)
-      # 將地點資料轉換為 View Object
-      location_view = Views::Location.new(location_entity)
-      routing.scope.view('location/location_result', locals: { location: location_view })
     end
   end
 end
