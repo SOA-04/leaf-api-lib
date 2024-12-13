@@ -20,7 +20,7 @@ module Leaf
         if input.success?
           Success(origin: input[:origin], destination: input[:destination], strategy: input[:strategy])
         else
-          Failure("Parse query location: #{input.errors.messages.first}")
+          Failure("Check your input: Something #{input.errors.messages.first}")
         end
       end
 

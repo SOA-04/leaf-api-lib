@@ -11,6 +11,8 @@ module Leaf
   # Application
   class App < Roda
     plugin :multi_route
+    plugin :flash
+
     route('queries') do |routing| # rubocop:disable Metrics/BlockLength
       routing.post 'submit' do
         query_request = Forms::NewQuery.new.call(routing.params)
@@ -18,14 +20,14 @@ module Leaf
 
         if query_result.failure?
           puts(query_result.failure)
-          # routing.flash[:error] = query_result.failure
+          flash[:error] = query_result.failure
           routing.redirect '/queries'
         end
 
         query_id = query_result.value!
         routing.session[:visited_queries] ||= []
-        routing.session[:visited_queries].insert(0, query_id).uniq!
-        # routing.flash[:notice] = "Query #{query_id} created."
+        routing.session[:visited_queries].insert(0, query_id[:id]).uniq!
+        flash[:notice] = "Query #{query_id[:id]} created."
         routing.redirect query_id[:id]
       end
 
@@ -41,7 +43,7 @@ module Leaf
 
           if query.failure?
             puts(query.failure)
-            # routing.flash[:error] = query_result.failure
+            flash[:error] = query_result.failure
             routing.redirect '/queries'
           end
 
@@ -50,7 +52,7 @@ module Leaf
         end
         routing.delete do
           routing.session[:visited_queries].delete(query_id)
-          routing.flash[:notice] = "Query '#{query_id}' has been removed from history."
+          flash[:notice] = "Query '#{query_id}' has been removed from history."
           routing.redirect '/queries'
         end
       end
