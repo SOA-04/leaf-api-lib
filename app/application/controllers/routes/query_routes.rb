@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 require 'securerandom'
-require_relative '../../../infrastructure/google_maps/mappers/trip_mapper'
-require_relative '../../../infrastructure/google_maps/gateways/google_maps_api'
 require_relative '../../../../config/environment'
 require_relative '../../../presentation/view_objects/query'
+require_relative '../../forms/new_query'
+require_relative '../../services/queries/add_query'
+require_relative '../../services/queries/get_query'
 
 module Leaf
   # Application
@@ -25,7 +26,7 @@ module Leaf
         routing.session[:visited_queries] ||= []
         routing.session[:visited_queries].insert(0, query_id).uniq!
         # routing.flash[:notice] = "Query #{query_id} created."
-        routing.redirect query_id
+        routing.redirect query_id[:id]
       end
 
       routing.is do
@@ -36,8 +37,15 @@ module Leaf
 
       routing.on String do |query_id|
         routing.get do
-          query = Leaf::Repository::Query.find_by_id(query_id)
-          query_view = Views::Query.new(query)
+          query = Service::GetQuery.new.call(query_id)
+
+          if query.failure?
+            puts(query.failure)
+            # routing.flash[:error] = query_result.failure
+            routing.redirect '/queries'
+          end
+
+          query_view = Views::Query.new(query.value!)
           routing.scope.view('query/query_result', locals: { query: query_view })
         end
         routing.delete do
