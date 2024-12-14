@@ -7,6 +7,8 @@ require_relative '../../representers/location'
 
 module Leaf
   module Service
+    # :reek:FeatureEnvy
+    # :reek:UncommunicativeVariableName
     class GetLocation
       include Dry::Transaction
 

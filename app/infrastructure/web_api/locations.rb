@@ -6,6 +6,8 @@ require_relative '../utils'
 
 module Leaf
   module WebAPI
+    # This is the gateway class to make API requests to our backend API.
+    # The endpoint will be determined by the provided environmental variable
     class Locations
       def initialize(endpoint)
         @http = HTTP.accept(:json).persistent(endpoint)
@@ -27,15 +29,15 @@ module Leaf
         # handle_response(response)
       end
 
-      private
+      # private
 
-      def handle_response(response)
-        unless response.status.success?
-          raise StandardError, "API Error: #{response.status} - #{response.parse['message']}"
-        end
+      # def handle_response(response)
+      #   unless response.status.success?
+      #     raise StandardError, "API Error: #{response.status} - #{response.parse['message']}"
+      #   end
 
-        response.parse
-      end
+      #   response.parse
+      # end
     end
   end
 end

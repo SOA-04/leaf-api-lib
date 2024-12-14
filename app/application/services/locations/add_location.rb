@@ -5,6 +5,8 @@ require_relative '../../../infrastructure/web_api/locations'
 
 module Leaf
   module Service
+    # :reek:FeatureEnvy
+    # :reek:UncommunicativeVariableName
     class AddLocation
       include Dry::Transaction
 
