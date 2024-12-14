@@ -11,6 +11,7 @@ module Leaf
   # Application
   class App < Roda
     plugin :multi_route
+    plugin :flash
 
     route('locations') do |routing| # rubocop:disable Metrics/BlockLength
       routing.post 'search' do
@@ -19,6 +20,7 @@ module Leaf
 
         if location_result.failure?
           puts(location_result.failure)
+          flash[:error] = location_result.failure
           routing.redirect '/locations'
         end
 
@@ -26,6 +28,7 @@ module Leaf
         plus_code = location_result.value!['plus_code']
         routing.session[:visited_locations] ||= []
         routing.session[:visited_locations].insert(0, plus_code).uniq!
+        flash[:notice] = "Location with Plus Code #{plus_code} created or retrieved successfully."
         routing.redirect "/locations/#{CGI.escape(plus_code)}"
       end
 
@@ -42,6 +45,7 @@ module Leaf
           # binding.irb
           if location_result.failure?
             puts(location_result.failure)
+            flash[:error] = location_result.failure
             routing.redirect '/locations'
           end
 
@@ -51,6 +55,7 @@ module Leaf
 
         routing.delete do
           routing.session[:visited_locations].delete(plus_code)
+          flash[:notice] = "Location with Plus Code #{plus_code} has been removed from history."
           routing.redirect '/locations'
         end
       end
