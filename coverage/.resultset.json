@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/jsl/Work/leaf-app/require_app.rb": {
+      "/home/harvey/leaf-app/require_app.rb": {
         "lines": [
           null,
           null,
@@ -11,12 +11,12 @@
           1,
           null,
           1,
-          31,
+          39,
           null,
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/config/environment.rb": {
+      "/home/harvey/leaf-app/config/environment.rb": {
         "lines": [
           null,
           null,
@@ -61,7 +61,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/domain/plan/entities/location.rb": {
+      "/home/harvey/leaf-app/app/domain/plan/entities/location.rb": {
         "lines": [
           null,
           null,
@@ -89,7 +89,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/domain/plan/entities/plan.rb": {
+      "/home/harvey/leaf-app/app/domain/plan/entities/plan.rb": {
         "lines": [
           null,
           null,
@@ -159,7 +159,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/domain/plan/entities/trip.rb": {
+      "/home/harvey/leaf-app/app/domain/plan/entities/trip.rb": {
         "lines": [
           null,
           null,
@@ -189,7 +189,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/domain/plan/utils.rb": {
+      "/home/harvey/leaf-app/app/domain/plan/utils.rb": {
         "lines": [
           null,
           null,
@@ -248,7 +248,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/domain/query/entities/query.rb": {
+      "/home/harvey/leaf-app/app/domain/query/entities/query.rb": {
         "lines": [
           null,
           null,
@@ -285,7 +285,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/infrastructure/database/orm/location_orm.rb": {
+      "/home/harvey/leaf-app/app/infrastructure/database/orm/location_orm.rb": {
         "lines": [
           null,
           null,
@@ -318,7 +318,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/infrastructure/database/orm/plan_orm.rb": {
+      "/home/harvey/leaf-app/app/infrastructure/database/orm/plan_orm.rb": {
         "lines": [
           null,
           null,
@@ -357,7 +357,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/infrastructure/database/orm/trip_orm.rb": {
+      "/home/harvey/leaf-app/app/infrastructure/database/orm/trip_orm.rb": {
         "lines": [
           null,
           null,
@@ -396,7 +396,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/infrastructure/database/repositories/for.rb": {
+      "/home/harvey/leaf-app/app/infrastructure/database/repositories/for.rb": {
         "lines": [
           null,
           null,
@@ -424,7 +424,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/infrastructure/database/repositories/location.rb": {
+      "/home/harvey/leaf-app/app/infrastructure/database/repositories/location.rb": {
         "lines": [
           null,
           null,
@@ -484,7 +484,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/infrastructure/database/repositories/trip.rb": {
+      "/home/harvey/leaf-app/app/infrastructure/database/repositories/trip.rb": {
         "lines": [
           null,
           null,
@@ -579,7 +579,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/infrastructure/database/repositories/plan.rb": {
+      "/home/harvey/leaf-app/app/infrastructure/database/repositories/plan.rb": {
         "lines": [
           null,
           null,
@@ -641,7 +641,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/infrastructure/database/repositories/query.rb": {
+      "/home/harvey/leaf-app/app/infrastructure/database/repositories/query.rb": {
         "lines": [
           null,
           null,
@@ -675,7 +675,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/infrastructure/google_maps/gateways/google_maps_api.rb": {
+      "/home/harvey/leaf-app/app/infrastructure/google_maps/gateways/google_maps_api.rb": {
         "lines": [
           null,
           null,
@@ -741,7 +741,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/infrastructure/utils.rb": {
+      "/home/harvey/leaf-app/app/infrastructure/utils.rb": {
         "lines": [
           null,
           null,
@@ -769,7 +769,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/infrastructure/google_maps/mappers/location_mapper.rb": {
+      "/home/harvey/leaf-app/app/infrastructure/google_maps/mappers/location_mapper.rb": {
         "lines": [
           null,
           null,
@@ -828,7 +828,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/infrastructure/google_maps/mappers/trip_mapper.rb": {
+      "/home/harvey/leaf-app/app/infrastructure/google_maps/mappers/trip_mapper.rb": {
         "lines": [
           null,
           null,
@@ -895,7 +895,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/infrastructure/huggingface/gateways/huggingface_api.rb": {
+      "/home/harvey/leaf-app/app/infrastructure/huggingface/gateways/huggingface_api.rb": {
         "lines": [
           null,
           null,
@@ -930,7 +930,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/infrastructure/nominatim/gateways/nominatim_api.rb": {
+      "/home/harvey/leaf-app/app/infrastructure/nominatim/gateways/nominatim_api.rb": {
         "lines": [
           null,
           null,
@@ -962,7 +962,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/infrastructure/nthusa/gateways/nthusa_api.rb": {
+      "/home/harvey/leaf-app/app/infrastructure/nthusa/gateways/nthusa_api.rb": {
         "lines": [
           null,
           null,
@@ -1001,7 +1001,96 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/application/controllers/app.rb": {
+      "/home/harvey/leaf-app/app/infrastructure/web_api/locations.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/harvey/leaf-app/app/infrastructure/web_api/queries.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/harvey/leaf-app/app/application/controllers/app.rb": {
         "lines": [
           null,
           null,
@@ -1058,7 +1147,7 @@
           null,
           1,
           0,
-          0,
+          null,
           0,
           null,
           null,
@@ -1082,7 +1171,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/application/controllers/routes/location_routes.rb": {
+      "/home/harvey/leaf-app/app/application/controllers/routes/location_routes.rb": {
         "lines": [
           null,
           null,
@@ -1091,94 +1180,7 @@
           1,
           1,
           1,
-          null,
           1,
-          null,
-          1,
-          null,
-          1,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          0,
-          null,
-          null,
-          null,
-          null,
-          0,
-          null,
-          0,
-          0,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/jsl/Work/leaf-app/app/application/forms/new_location.rb": {
-        "lines": [
-          null,
           null,
           1,
           null,
@@ -1186,52 +1188,53 @@
           1,
           null,
           1,
-          1,
-          1,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
           null,
           null,
           null,
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/application/services/add_location.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          1,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null,
-          null,
-          null,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/jsl/Work/leaf-app/app/presentation/view_objects/location.rb": {
+      "/home/harvey/leaf-app/app/presentation/view_objects/location.rb": {
         "lines": [
           null,
           null,
@@ -1261,7 +1264,128 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/application/controllers/routes/trip_routes.rb": {
+      "/home/harvey/leaf-app/app/application/forms/new_location.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/harvey/leaf-app/app/application/services/locations/add_location.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/harvey/leaf-app/app/application/services/locations/get_location.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/harvey/leaf-app/app/application/representers/location.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/harvey/leaf-app/app/application/controllers/routes/trip_routes.rb": {
         "lines": [
           null,
           null,
@@ -1320,7 +1444,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/application/controllers/routes/query_routes.rb": {
+      "/home/harvey/leaf-app/app/application/controllers/routes/query_routes.rb": {
         "lines": [
           null,
           null,
@@ -1329,10 +1453,14 @@
           1,
           1,
           1,
+          1,
+          null,
+          1,
           null,
           1,
           1,
           1,
+          null,
           1,
           0,
           0,
@@ -1340,26 +1468,33 @@
           null,
           0,
           0,
-          null,
-          0,
-          null,
-          null,
-          0,
           0,
           0,
           null,
+          null,
           0,
-          null,
-          null,
+          0,
           0,
           0,
           0,
           null,
           null,
+          0,
+          0,
+          0,
+          null,
+          null,
           null,
           0,
           0,
           0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
           0,
           0,
           null,
@@ -1374,7 +1509,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/presentation/view_objects/query.rb": {
+      "/home/harvey/leaf-app/app/presentation/view_objects/query.rb": {
         "lines": [
           null,
           null,
@@ -1408,7 +1543,7 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/application/forms/new_query.rb": {
+      "/home/harvey/leaf-app/app/application/forms/new_query.rb": {
         "lines": [
           null,
           null,
@@ -1418,32 +1553,6 @@
           1,
           null,
           1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/jsl/Work/leaf-app/app/application/forms/new_trip.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          null,
-          1,
-          1,
-          null,
           1,
           1,
           null,
@@ -1461,22 +1570,21 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/application/services/add_query.rb": {
+      "/home/harvey/leaf-app/app/application/services/queries/add_query.rb": {
         "lines": [
           null,
           null,
           1,
           1,
-          null,
-          1,
-          1,
-          null,
-          null,
-          1,
           1,
           null,
           1,
           1,
+          null,
+          null,
+          1,
+          1,
+          null,
           1,
           1,
           null,
@@ -1484,12 +1592,6 @@
           null,
           1,
           0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
           0,
           null,
           0,
@@ -1501,6 +1603,39 @@
           null,
           null,
           null,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/harvey/leaf-app/app/application/services/queries/get_query.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          0,
           null,
           0,
           null,
@@ -1508,15 +1643,6 @@
           null,
           null,
           1,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null,
-          1,
-          0,
           0,
           0,
           null,
@@ -1527,7 +1653,135 @@
           null
         ]
       },
-      "/Users/jsl/Work/leaf-app/app/application/services/add_trip.rb": {
+      "/home/harvey/leaf-app/app/application/representers/query.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/harvey/leaf-app/app/application/representers/plan.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/harvey/leaf-app/app/application/representers/trip_formal.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/harvey/leaf-app/app/application/forms/new_trip.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/harvey/leaf-app/app/application/services/add_trip.rb": {
         "lines": [
           null,
           null,
@@ -1601,6 +1855,6 @@
         ]
       }
     },
-    "timestamp": 1733901219
+    "timestamp": 1734171311
   }
 }
