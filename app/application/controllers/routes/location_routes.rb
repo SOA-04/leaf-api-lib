@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
-require_relative '../../../infrastructure/google_maps/mappers/location_mapper'
-require_relative '../../../infrastructure/google_maps/gateways/google_maps_api'
-require_relative '../../forms/new_location'
-require_relative '../../services/add_location'
+require 'securerandom'
+require_relative '../../../../config/environment'
 require_relative '../../../presentation/view_objects/location'
+require_relative '../../forms/new_location'
+require_relative '../../services/locations/add_location'
+require_relative '../../services/locations/get_location'
 
 module Leaf
   # Application
@@ -13,51 +14,43 @@ module Leaf
 
     route('locations') do |routing| # rubocop:disable Metrics/BlockLength
       routing.post 'search' do
-        # Validate input using Form Object
-        form = Forms::NewLocation.new.call(routing.params)
+        location_request = Forms::NewLocation.new.call(routing.params)
+        location_result = Service::AddLocation.new.call(location_request)
 
-        if form.failure?
-          routing.flash[:error] = form.errors.to_h.values.join(', ')
+        if location_result.failure?
+          puts(location_result.failure)
           routing.redirect '/locations'
         end
 
-        # Encode location query and call service
-        location_query = CGI.escape(form[:location].downcase)
-        result = Service::AddLocation.new.call(location_query: location_query)
-
-        if result.failure?
-          routing.flash[:error] = result.failure
-          routing.redirect '/locations'
-        end
-
-        # Handle successful result
-        location_entity = result.value!
+        # 使用 Plus Code 作為唯一標識符
+        plus_code = location_result.value!['plus_code']
         routing.session[:visited_locations] ||= []
-        routing.session[:visited_locations].insert(0, location_entity.name).uniq!
-        routing.redirect "/locations/#{location_query}"
+        routing.session[:visited_locations].insert(0, plus_code).uniq!
+        routing.redirect "/locations/#{CGI.escape(plus_code)}"
       end
 
       routing.is do
         routing.get do
-          routing.scope.view('location/location_form')
+          routing.scope.view 'location/location_form'
         end
       end
 
-      routing.on String do |location_query|
+      routing.on String do |plus_code|
         routing.get do
-          location_query = CGI.unescape(location_query)
-          location_entity = Leaf::GoogleMaps::LocationMapper.new(
-            Leaf::GoogleMaps::API,
-            Leaf::App.config.GOOGLE_TOKEN
-          ).find(location_query)
+          # puts "#{plus_code}"
+          location_result = Service::GetLocation.new.call(CGI.unescape(plus_code))
+          # binding.irb
+          if location_result.failure?
+            puts(location_result.failure)
+            routing.redirect '/locations'
+          end
 
-          location_view = Views::Location.new(location_entity)
+          location_view = Views::Location.new(location_result.value!)
           routing.scope.view('location/location_result', locals: { location: location_view })
         end
 
         routing.delete do
-          routing.session[:visited_locations].delete(location_query)
-          routing.flash[:notice] = "Location '#{location_query}' has been removed from history."
+          routing.session[:visited_locations].delete(plus_code)
           routing.redirect '/locations'
         end
       end
