@@ -15,7 +15,6 @@ module Leaf
 
     route('trips') do |routing| # rubocop:disable Metrics/BlockLength
       routing.post 'submit' do
-        
         trip_request = Forms::NewTrip.new.call(routing.params)
         trip_result = Service::AddTrip.new.call(trip_request)
         # binding.irb
@@ -50,7 +49,6 @@ module Leaf
           end
 
           trip_view = Views::Trip.new(trip.value!)
-          
           routing.scope.view('trips/trip_result', locals: { trip: trip_view })
         end
         routing.delete do
