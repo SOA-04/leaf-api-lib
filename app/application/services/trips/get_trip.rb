@@ -19,7 +19,7 @@ module Leaf
       private
 
       def fetch(input)
-        result = WebAPI::Trip.new(App.config.API_URL).get_trip(input)
+        result = Leaf::WebAPI::Trip.new(App.config.API_URL).get_trip(input)
 
         Success(result)
       rescue StandardError => e

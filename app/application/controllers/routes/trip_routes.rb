@@ -13,15 +13,17 @@ module Leaf
     plugin :multi_route
     plugin :flash
 
-    route('trip') do |routing| # rubocop:disable Metrics/BlockLength
+    route('trips') do |routing| # rubocop:disable Metrics/BlockLength
       routing.post 'submit' do
+        
         trip_request = Forms::NewTrip.new.call(routing.params)
         trip_result = Service::AddTrip.new.call(trip_request)
+        # binding.irb
 
         if trip_result.failure?
           puts(trip_result.failure)
           flash[:error] = trip_result.failure
-          routing.redirect '/trip'
+          routing.redirect '/trips'
         end
 
         trip_id = trip_result.value!
@@ -33,7 +35,7 @@ module Leaf
 
       routing.is do
         routing.get do
-          routing.scope.view 'trip/trip_form'
+          routing.scope.view 'trips/trip_form'
         end
       end
 
@@ -44,16 +46,17 @@ module Leaf
           if trip.failure?
             puts(trip.failure)
             flash[:error] = trip_result.failure
-            routing.redirect '/trip'
+            routing.redirect '/trips'
           end
 
           trip_view = Views::Trip.new(trip.value!)
-          routing.scope.view('trip/trip_result', locals: { trip: trip_view })
+          
+          routing.scope.view('trips/trip_result', locals: { trip: trip_view })
         end
         routing.delete do
           routing.session[:visited_trip].delete(trip_id)
           flash[:notice] = "Trip '#{trip_id}' has been removed from history."
-          routing.redirect '/trip'
+          routing.redirect '/trips'
         end
       end
     end

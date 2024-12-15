@@ -25,11 +25,11 @@ module Leaf
       end
 
       def call_api(input)
-        result = WebAPI::Trip.new(App.config.API_URL).create_trip(
+        result = Leaf::WebAPI::Trip.new(App.config.API_URL).create_trip(
           input[:origin], input[:destination], input[:strategy]
         )
 
-        Success(id: result['id'])
+        Success(id: result['trip_id'])
       rescue StandardError => e
         Failure("API Error: #{e}")
       end

@@ -16,7 +16,7 @@ module Leaf
       def get_trip(id)
         response = @http.get("/trip/#{id}")
 
-        Response.new(response).handle_error("by WebAPI::Query::Get, status: #{response.status}")
+        Response.new(response).handle_error("by WebAPI::Trip::Get, status: #{response.status}")
       end
 
       # Given 2 points and the travel strategy, obtain the distance and travel time.
@@ -25,7 +25,7 @@ module Leaf
       # @param  destination [String]  Can be addresses or coordinate.
       # @option strategy    [String]  Possible values are ['driving', 'walking', 'transit', 'bicycling']
       def create_trip(origin, destination, strategy = 'walking')
-        response = @http.post('/trips', json: {
+        response = @http.post('/trip', params: {
                                 destination: destination,
                                 origin: origin,
                                 strategy: strategy
