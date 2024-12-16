@@ -27,7 +27,7 @@ module Leaf
         query_id = query_result.value!
         routing.session[:visited_queries] ||= []
         routing.session[:visited_queries].insert(0, query_id[:id]).uniq!
-        flash[:notice] = "Query #{query_id[:id]} created."
+        flash[:notice] = 'Query created successfully.'
         routing.redirect query_id[:id]
       end
 
@@ -42,9 +42,8 @@ module Leaf
           query = Service::GetQuery.new.call(query_id)
 
           if query.failure?
-            puts(query.failure)
-            flash[:error] = query_result.failure
-            routing.redirect '/queries'
+            flash[:notice] = nil
+            return routing.scope.view 'query/query_wait'
           end
 
           query_view = Views::Query.new(query.value!)
