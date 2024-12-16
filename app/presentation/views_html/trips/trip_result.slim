@@ -5,11 +5,11 @@ section class="flex flex-col items-center justify-center dark:bg-gray-900"
       div
         label class="text-xl" for="origin" 起點:
         p class="dark:bg-gray-50 dark:text-gray-700 rounded-lg p-2 px-3 mt-2 w-full border" type="text" name="origin" id="origin"
-          = trip.origin.name
+          = trip.origin_name
       div
         label class="text-xl" for="destination" 終點:
         p class="dark:bg-gray-50 dark:text-gray-700 rounded-lg p-2 px-3 mt-2 w-full border" type="text" name="destination" id="destination"
-          = trip.destination.name
+          = trip.destination_name
         
     div class="mb-4 grid grid-cols-2 space-x-10"
       div
@@ -27,7 +27,7 @@ section class="flex flex-col items-center justify-center dark:bg-gray-900"
       div
         label class="text-xl" for="strategy" 預計時間:
         p class="appearance-none bg-white dark:bg-gray-50 dark:text-gray-700 rounded-lg p-2 px-3 mt-2 w-full border" name="strategy" id="strategy"
-          = "#{trip.duration / 60} 分鐘"
+          = "#{trip.duration} 分鐘"
 
     div class="flex justify-end mt-5"
       <a class="bg-gray-800 text-white dark:bg-gray-50 dark:text-gray-800 px-4 py-2 rounded-xl" href="/trips">重新查詢</a>
