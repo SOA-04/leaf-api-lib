@@ -32,7 +32,7 @@ javascript:
       updateProgressBar(payload.progress, payload.message)
       percentage = payload.progress;
       if (payload.progress == 100) {
-        await sleep(3000);
+        await sleep(1500);
         window.location.reload(true);
       }
     }
