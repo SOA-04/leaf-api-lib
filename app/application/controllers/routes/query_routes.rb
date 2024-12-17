@@ -3,6 +3,7 @@
 require 'securerandom'
 require_relative '../../../../config/environment'
 require_relative '../../../presentation/view_objects/query'
+require_relative '../../../presentation/view_objects/processing'
 require_relative '../../forms/new_query'
 require_relative '../../services/queries/add_query'
 require_relative '../../services/queries/get_query'
@@ -43,7 +44,8 @@ module Leaf
 
           if query.failure?
             flash[:notice] = nil
-            return routing.scope.view 'query/query_wait'
+            processing_view = Views::Processing.new(App.config, query_id)
+            return routing.scope.view('query/query_wait', locals: { processing: processing_view })
           end
 
           query_view = Views::Query.new(query.value!)
