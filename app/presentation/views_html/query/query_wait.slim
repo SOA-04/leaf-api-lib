@@ -1,3 +1,41 @@
-<p class="dark:text-gray-200"> 
-    == "Currently processing ... maybe come back later?"
+<p id="progress_msg" class="dark:text-gray-200 pb-5"> 
+    == "Currently processing ..."
 </p>
+<div class="w-full bg-white h-7 dark:bg-gray-900 border-gray-800 dark:border-gray-200 rounded-2xl border-2">
+  <div id="progress_bar" class="bg-gray-800 dark:bg-gray-200 h-6 transitional-all duration-500 ease-in-out rounded-xl" style="width: 0%"></div>
+</div>
+
+script src="#{processing.ws_javascript}"
+
+javascript:
+  const message = document.getElementById("progress_msg");
+  const progressBar = document.getElementById("progress_bar");
+
+  function updateProgressBar(newPercentage, newMessage) {
+    progressBar.style.width = newPercentage + '%';
+    message.innerHTML = newMessage;
+  }
+
+  // Websocket
+  let channel = "#{processing.ws_channel_id}";
+  let client = new Faye.Client("#{processing.ws_route}");
+  let percentage = 0;
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+  }
+
+  updateProgressBar(percentage, "Currently processing...")
+  client.subscribe('/' + channel, async function(payload) {
+    if (payload.progress > percentage) {
+      console.log("updating " + payload.progress + " with message of:" + payload.message);
+      updateProgressBar(payload.progress, payload.message)
+      percentage = payload.progress;
+      if (payload.progress == 100) {
+        await sleep(3000);
+        window.location.reload(true);
+      }
+    }
+
+  })
+
