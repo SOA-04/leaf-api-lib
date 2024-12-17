@@ -6,23 +6,13 @@ section class="flex flex-col items-center justify-center dark:bg-gray-900"
     / Origin Map
     div class="relative h-32 rounded-lg overflow-hidden shadow-lg"
       h2 class="absolute top-2 left-2 bg-gray-800 text-white px-3 py-1 rounded text-sm z-10" 起點
-      iframe 
-        src="https://www.google.com/maps/embed/v1/view?key=AIzaSyAPxvV3APy_nG5hTIj-1Oo0jkiNO0gM0JY&q=#{CGI.escape(query.origin.plus_code)}&zoom=14"
-        class="w-full h-full border-0"
-        referrerpolicy="no-referrer-when-downgrade"
-        allowfullscreen
-        loading="lazy"
+      iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAPxvV3APy_nG5hTIj-1Oo0jkiNO0gM0JY&q=#{CGI.escape(query.origin.plus_code)}&zoom=18" class="w-full h-full border-0" referrerpolicy="no-referrer-when-downgrade" allowfullscreen=true loading="lazy"
 
     / Destination Map
     div class="relative h-32 rounded-lg overflow-hidden shadow-lg"
       h2 class="absolute top-2 left-2 bg-gray-800 text-white px-3 py-1 rounded text-sm z-10" 終點
-      iframe 
-        src="https://www.google.com/maps/embed/v1/view?key=AIzaSyAPxvV3APy_nG5hTIj-1Oo0jkiNO0gM0JY&q=#{CGI.escape(query.destination.plus_code)}&zoom=14"
-        class="w-full h-full border-0"
-        referrerpolicy="no-referrer-when-downgrade"
-        allowfullscreen
-        loading="lazy"
-  
+      iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAPxvV3APy_nG5hTIj-1Oo0jkiNO0gM0JY&q=#{CGI.escape(query.destination.plus_code)}&zoom=18" class="w-full h-full border-0" referrerpolicy="no-referrer-when-downgrade" allowfullscreen=true loading="lazy"
+
   div class="relative overflow-x-auto shadow-md sm:rounded-lg"
     table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
       thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
@@ -53,7 +43,7 @@ section class="flex flex-col items-center justify-center dark:bg-gray-900"
             td class="px-6 py-4"
               | #{plan.strategy}
             td class="px-6 py-4"
-              | #{plan.duration} 分鐘
+              | #{plan.duration / 60} 分鐘
             td class="px-6 py-4"
               | #{plan.distance} 公尺
             td class="px-6 py-4"
