@@ -1,23 +1,56 @@
+javascript:
+  const getCurrentLocation = (inputId) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            document.getElementById(inputId).value = `${lat},${lng}`;
+          },
+          () => {
+            alert("Couldn't get your location.");
+          }
+      );
+    } else {
+      alert("Your browser does not support Geolocation API.");
+    }
+  };
+
 section class="flex flex-col items-center justify-center mt-10 dark:bg-gray-900"
   h1 class="text-center text-2xl font-bold mb-4 dark:text-gray-200" 旅行規劃查詢
   form class="bg-white dark:bg-gray-800 dark:text-gray-200 p-6 rounded-lg shadow-lg border" method="post" action="/queries/submit"
     div class="mb-4"
       label class="text-xl" for="origin" 起點:
-      input class="dark:bg-gray-50 dark:text-gray-700 rounded-lg p-2 px-3 mt-2 w-full border" type="text" name="origin" id="origin" required="true" placeholder="輸入出發地"
+      div class="flex gap-2 items-center"
+        input class="dark:bg-gray-50 dark:text-gray-700 rounded-lg p-2 px-3 mt-2 w-full border" type="text" name="origin" id="origin" required="true" placeholder="輸入出發地"
+        button type="button" id="getOriginLocation" class="bg-gray-800 text-white dark:bg-gray-50 dark:text-gray-800 px-4 py-2 rounded-xl" onclick="getCurrentLocation('origin')"
+          svg fill="currentColor" class="h-6 w-6" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 395.71 395.71" xml:space="preserve"
+            g id="SVGRepo_bgCarrier" stroke-width="0"
+            g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
+            g id="SVGRepo_iconCarrier"
+            g
+              path d="M197.849,0C122.131,0,60.531,61.609,60.531,137.329c0,72.887,124.591,243.177,129.896,250.388l4.951,6.738 c0.579,0.792,1.501,1.255,2.471,1.255c0.985,0,1.901-0.463,2.486-1.255l4.948-6.738c5.308-7.211,129.896-177.501,129.896-250.388 C335.179,61.609,273.569,0,197.849,0z M197.849,88.138c27.13,0,49.191,22.062,49.191,49.191c0,27.115-22.062,49.191-49.191,49.191 c-27.114,0-49.191-22.076-49.191-49.191C148.658,110.2,170.734,88.138,197.849,88.138z"
+
 
     div class="mb-4"
       label class="text-xl" for="destination" 終點:
-      input class="dark:bg-gray-50 dark:text-gray-700 rounded-lg p-2 px-3 mt-2 w-full border" type="text" name="destination" id="destination" required="true" placeholder="輸入目的地"
+      div class="flex gap-2 items-center"
+        input class="dark:bg-gray-50 dark:text-gray-700 rounded-lg p-2 px-3 mt-2 w-full border" type="text" name="destination" id="destination" required="true" placeholder="輸入目的地"
+        button type="button" id="getDestinationLocation" class="bg-gray-800 text-white dark:bg-gray-50 dark:text-gray-800 px-4 py-2 rounded-xl" onclick="getCurrentLocation('destination')"
+          svg fill="currentColor" class="h-6 w-6" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 395.71 395.71" xml:space="preserve"
+            g id="SVGRepo_bgCarrier" stroke-width="0"
+            g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
+            g id="SVGRepo_iconCarrier"
+            g
+              path d="M197.849,0C122.131,0,60.531,61.609,60.531,137.329c0,72.887,124.591,243.177,129.896,250.388l4.951,6.738 c0.579,0.792,1.501,1.255,2.471,1.255c0.985,0,1.901-0.463,2.486-1.255l4.948-6.738c5.308-7.211,129.896-177.501,129.896-250.388 C335.179,61.609,273.569,0,197.849,0z M197.849,88.138c27.13,0,49.191,22.062,49.191,49.191c0,27.115-22.062,49.191-49.191,49.191 c-27.114,0-49.191-22.076-49.191-49.191C148.658,110.2,170.734,88.138,197.849,88.138z"
 
     div class="mb-4"
-      label class="text-xl" for="strategy" 旅行策略:
+      label class="text-xl" for="strategy" 前往公車站的方式:
       select class="appearance-none bg-white dark:bg-gray-50 dark:text-gray-700 rounded-lg p-2 px-3 mt-2 w-full border" name="strategy" id="strategy" required="true"
         option disabled="true" selected="true" 請選擇
         option value="walking" 步行
-        option value="driving" 開車
         option value="bicycling" 騎自行車
-        option value="school_bus" 校園公車
         option value="transit" 公共交通
 
     div class="flex justify-end mt-10"
-      <button type="submit" class="bg-gray-800 text-white dark:bg-gray-50 dark:text-gray-800 px-4 py-2 rounded-xl">查詢</button>
+      button type="submit" class="bg-gray-800 text-white dark:bg-gray-50 dark:text-gray-800 px-4 py-2 rounded-xl" 查詢

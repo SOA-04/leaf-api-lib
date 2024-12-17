@@ -1,33 +1,57 @@
 section class="flex flex-col items-center justify-center dark:bg-gray-900"
   h1 class="text-center text-2xl font-bold mb-4 dark:text-gray-200" 旅行規劃結果
-  div class="bg-white dark:bg-gray-800 dark:text-gray-200 p-6 rounded-lg shadow-lg border"
-    div class="mb-4 grid grid-cols-2 space-x-10"
-      div
-        label class="text-xl" for="origin" 起點:
-        p class="dark:bg-gray-50 dark:text-gray-700 rounded-lg p-2 px-3 mt-2 w-full border" type="text" name="origin" id="origin"
-          = query.origin_name
-      div
-        label class="text-xl" for="destination" 終點:
-        p class="dark:bg-gray-50 dark:text-gray-700 rounded-lg p-2 px-3 mt-2 w-full border" type="text" name="destination" id="destination"
-          = query.destination_name
-        
-    div class="mb-4 grid grid-cols-2 space-x-10"
-      div
-        label class="text-xl" for="strategy" 旅行策略:
-        p class="appearance-none bg-white dark:bg-gray-50 dark:text-gray-700 rounded-lg p-2 px-3 mt-2 w-full border" name="strategy" id="strategy"
-          = query.strategy
-      div
 
-    div class="mb-4 grid grid-cols-2 space-x-10"
-      div
-        label class="text-xl" for="distance" 距離:
-        p class="appearance-none bg-white dark:bg-gray-50 dark:text-gray-700 rounded-lg p-2 px-3 mt-2 w-full border" name="distance" id="distance"
-          = "#{query.distance} 公尺"
+  / 2 maps here
+  div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 w-full max-w-7xl px-4"
+    / Origin Map
+    div class="relative h-32 rounded-lg overflow-hidden shadow-lg"
+      h2 class="absolute top-2 left-2 bg-gray-800 text-white px-3 py-1 rounded text-sm z-10" 起點
+      iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAPxvV3APy_nG5hTIj-1Oo0jkiNO0gM0JY&q=#{CGI.escape(query.origin.plus_code)}&zoom=18" class="w-full h-full border-0" referrerpolicy="no-referrer-when-downgrade" allowfullscreen=true loading="lazy"
 
-      div
-        label class="text-xl" for="duration" 預計時間:
-        p class="appearance-none bg-white dark:bg-gray-50 dark:text-gray-700 rounded-lg p-2 px-3 mt-2 w-full border" name="duration" id="duration"
-          = "#{query.duration} 分鐘"
+    / Destination Map
+    div class="relative h-32 rounded-lg overflow-hidden shadow-lg"
+      h2 class="absolute top-2 left-2 bg-gray-800 text-white px-3 py-1 rounded text-sm z-10" 終點
+      iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAPxvV3APy_nG5hTIj-1Oo0jkiNO0gM0JY&q=#{CGI.escape(query.destination.plus_code)}&zoom=18" class="w-full h-full border-0" referrerpolicy="no-referrer-when-downgrade" allowfullscreen=true loading="lazy"
 
-    div class="flex justify-end mt-5"
-      <a class="bg-gray-800 text-white dark:bg-gray-50 dark:text-gray-800 px-4 py-2 rounded-xl" href="/trips">重新查詢</a>
+  div class="relative overflow-x-auto shadow-md sm:rounded-lg"
+    table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+      thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+        tr
+          th scope="col" class="px-6 py-3"
+            | #
+          th scope="col" class="px-6 py-3"
+            | 起點
+          th scope="col" class="px-6 py-3"
+            | 終點
+          th scope="col" class="px-6 py-3"
+            | 前往公車站的方式
+          th scope="col" class="px-6 py-3"
+            | 用時
+          th scope="col" class="px-6 py-3"
+            | 距離
+          th scope="col" class="px-6 py-3"
+            | 查看更多
+      tbody
+        - query.plans.each_with_index do |plan, index|
+          tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+            th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              | #{index + 1}
+            td class="px-6 py-4"
+              | #{plan.origin.name}
+            td class="px-6 py-4"
+              | #{plan.destination.name}
+            td class="px-6 py-4"
+              | #{plan.strategy}
+            td class="px-6 py-4"
+              | #{plan.duration / 60} 分鐘
+            td class="px-6 py-4"
+              | #{plan.distance} 公尺
+            td class="px-6 py-4"
+              a class="bg-gray-800 text-white dark:bg-gray-50 dark:text-gray-800 px-4 py-2 rounded-lg inline-flex items-center justify-center" href="/queries/#{query.id}/#{index}"
+                svg fill="currentColor" class="h-5 w-5" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve"
+                  path id="XMLID_27_" d="M15,180h263.787l-49.394,49.394c-5.858,5.857-5.858,15.355,0,21.213C232.322,253.535,236.161,255,240,255
+                      s7.678-1.465,10.606-4.394l75-75c5.858-5.857,5.858-15.355,0-21.213l-75-75c-5.857-5.857-15.355-5.857-21.213,0
+                      c-5.858,5.857-5.858,15.355,0,21.213L278.787,150H15c-8.284,0-15,6.716-15,15S6.716,180,15,180z"
+
+  div class="flex justify-end mt-5"
+    a class="bg-gray-800 text-white dark:bg-gray-50 dark:text-gray-800 px-4 py-2 rounded-xl" href="/queries" 重新查詢

@@ -38,23 +38,38 @@ module Leaf
         end
       end
 
-      routing.on String do |query_id|
-        routing.get do
-          query = Service::GetQuery.new.call(query_id)
+      routing.on String do |query_id| # rubocop:disable Metrics/BlockLength
+        routing.on Integer do |plan_id|
+          query = Service::GetQuery.new.call(query_id).value!
 
-          if query.failure?
-            flash[:notice] = nil
-            processing_view = Views::Processing.new(App.config, query_id)
-            return routing.scope.view('query/query_wait', locals: { processing: processing_view })
+          unless plan_id.between?(0, query.plans.length - 1)
+            flash[:error] = 'Index out of range.'
+            routing.redirect "/queries/#{query_id}"
           end
 
-          query_view = Views::Query.new(query.value!)
-          routing.scope.view('query/query_result', locals: { query: query_view })
+          routing.scope.view 'plans/plan_result', locals: { plan: query.plans[plan_id], query_id: query_id }
+        rescue StandardError => e
+          flash[:error] = e
         end
-        routing.delete do
-          routing.session[:visited_queries].delete(query_id)
-          flash[:notice] = "Query '#{query_id}' has been removed from history."
-          routing.redirect '/queries'
+
+        routing.is do
+          routing.get do
+            query = Service::GetQuery.new.call(query_id)
+
+            if query.failure?
+              flash[:notice] = nil
+              processing_view = Views::Processing.new(App.config, query_id)
+              return routing.scope.view('query/query_wait', locals: { processing: processing_view })
+            end
+
+            routing.scope.view('query/query_result', locals: { query: query.value! })
+          end
+
+          routing.delete do
+            routing.session[:visited_queries].delete(query_id)
+            flash[:notice] = "Query '#{query_id}' has been removed from history."
+            routing.redirect '/queries'
+          end
         end
       end
     end
