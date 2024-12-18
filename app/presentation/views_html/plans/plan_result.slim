@@ -1,34 +1,29 @@
-section class="flex flex-col items-center justify-center dark:bg-gray-900"
-  h1 class="text-center text-2xl font-bold mb-4 dark:text-gray-200" 方案規劃結果
-  div class="bg-white dark:bg-gray-800 dark:text-gray-200 p-6 rounded-lg shadow-lg border"
-    div class="mb-4 grid grid-cols-2 space-x-10"
-      div
-        label class="text-xl" for="origin" 起點:
-        p class="dark:bg-gray-50 dark:text-gray-700 rounded-lg p-2 px-3 mt-2 w-full border" type="text" name="origin" id="origin"
-          = plan.origin.name
-      div
-        label class="text-xl" for="destination" 終點:
-        p class="dark:bg-gray-50 dark:text-gray-700 rounded-lg p-2 px-3 mt-2 w-full border" type="text" name="destination" id="destination"
-          = plan.destination.name
+section class="flex flex-col items-center justify-center dark:bg-gray-900 py-10"
+  h1 class="text-center text-2xl font-bold mb-6 dark:text-gray-200" 方案規劃結果
 
-    div class="mb-4 grid grid-cols-2 space-x-10"
-      div
-        label class="text-xl" for="strategy" 旅行策略:
-        p class="appearance-none bg-white dark:bg-gray-50 dark:text-gray-700 rounded-lg p-2 px-3 mt-2 w-full border" name="strategy" id="strategy"
-          = plan.strategy
-      div
+  div class="bg-white dark:bg-gray-800 dark:text-gray-200 p-8 rounded-lg shadow-lg border w-full max-w-6xl"
+    div class="flex items-center justify-center space-x-4"
+      a class="w-1/4 text-center flex flex-col items-center" href="https://www.google.com/maps/search/?api=1&query=#{CGI.escape(plan.origin.plus_code)}"
+        div class="bg-gray-100 dark:bg-gray-700 rounded-lg border border-gray-300 dark:border-gray-600 p-4 shadow-md w-full h-32 flex flex-col justify-center"
+          h2 class="font-bold text-sm text-gray-800 dark:text-gray-200 mb-1"
+            = plan.origin.name
+          p class="text-xs text-gray-500 dark:text-gray-400" 起點
 
-    div class="mb-4 grid grid-cols-2 space-x-10"
-      div
-        label class="text-xl" for="distance" 距離:
-        p class="appearance-none bg-white dark:bg-gray-50 dark:text-gray-700 rounded-lg p-2 px-3 mt-2 w-full border" name="distance" id="distance"
-          = "#{plan.distance} 公尺"
+      - plan.trips.each_with_index do |trip, index|
+        div class="flex flex-col items-center justify-center space-y-2"
+          p class="text-xs text-gray-500 dark:text-gray-400 mt-1"
+            = "#{trip.distance} 公尺"
+          a class="flex items-center justify-center" href="https://www.google.com/maps/dir/?api=1&origin=#{CGI.escape(plan.origin.plus_code)}&destination=#{CGI.escape(trip.destination.plus_code)}&travelmode=#{trip.strategy}"
+            svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" stroke="currentColor" fill="currentColor"
+              path d="M14 2h-7.229l7.014 7h-13.785v6h13.785l-7.014 7h7.229l10-10z"
+          p class="text-xs text-gray-500 dark:text-gray-400 mt-1"
+            = "#{trip.duration / 60} 分鐘"
 
-      div
-        label class="text-xl" for="duration" 預計時間:
-        p class="appearance-none bg-white dark:bg-gray-50 dark:text-gray-700 rounded-lg p-2 px-3 mt-2 w-full border" name="duration" id="duration"
-          = "#{plan.duration / 60} 分鐘"
+        a class="w-1/4 text-center flex flex-col items-center" href="https://www.google.com/maps/search/?api=1&query=#{CGI.escape(trip.destination.plus_code)}"
+          div class="bg-gray-100 dark:bg-gray-700 rounded-lg border border-gray-300 dark:border-gray-600 p-4 shadow-md w-full h-32 flex flex-col justify-center"
+            h2 class="font-bold text-sm text-gray-800 dark:text-gray-200 mb-1"
+              = trip.destination.name
 
-    div class="flex justify-end mt-5 space-x-10"
-      a class="bg-gray-800 text-white dark:bg-gray-50 dark:text-gray-800 px-4 py-2 rounded-xl" href="/queries/#{query_id}" 返回查詢結果
-      a class="bg-gray-800 text-white dark:bg-gray-50 dark:text-gray-800 px-4 py-2 rounded-xl" href="/queries" 重新查詢
+  div class="flex justify-end mt-6 space-x-6"
+    a class="bg-gray-800 text-white dark:bg-gray-50 dark:text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-200" href="/queries/#{query_id}" 返回查詢結果
+    a class="bg-gray-800 text-white dark:bg-gray-50 dark:text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-200" href="/queries" 重新查詢
