@@ -20,9 +20,11 @@ section class="flex flex-col items-center justify-center dark:bg-gray-900"
           th scope="col" class="px-6 py-3"
             | #
           th scope="col" class="px-6 py-3"
-            | 起點
+            | 出發時間
           th scope="col" class="px-6 py-3"
-            | 終點
+            | 搭車地點
+          th scope="col" class="px-6 py-3"
+            | 扺達時間
           th scope="col" class="px-6 py-3"
             | 前往公車站的方式
           th scope="col" class="px-6 py-3"
@@ -37,9 +39,11 @@ section class="flex flex-col items-center justify-center dark:bg-gray-900"
             th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               | #{index + 1}
             td class="px-6 py-4"
-              | #{plan.origin.name}
+              | #{Time.parse(plan.leave_at).strftime("%H:%M")}
             td class="px-6 py-4"
-              | #{plan.destination.name}
+              | #{plan.trips[1].origin.name}
+            td class="px-6 py-4"
+              | #{Time.parse(plan.arrive_at).strftime("%H:%M")}
             td class="px-6 py-4"
               | #{plan.strategy}
             td class="px-6 py-4"
